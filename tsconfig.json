@@ -1,10 +1,9 @@
 {
-    "compilerOptions": {
-        "module": "ESNext",
-        "target": "ES6",
-        "lib": ["DOM", "ESNext"],
-
-      
-    },
-    "include": ["src"]
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES6",
+    "lib": ["DOM", "ESNext", "Decorators"],
+    "experimentalDecorators": true
+  },
+  "include": ["src"]
 }

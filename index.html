@@ -3,28 +3,38 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Simple QR Code Generator" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/style.scss" />
     <script src="src/main.ts" type="module"></script>
+    <title>Simple QR Code Generator</title>
   </head>
   <body>
     <div class="container">
-      <h1>Simple QR Code Generator</h1>
+      <h1 class="container__header">Simple QR Code Generator</h1>
       <img
-        src="http://api.qrserver.com/v1/create-qr-code/?data=null&size=200"
-        alt="image"
+        class="container__image"
+        width="200"
+        height="200"
+        src="assets/placeholder.png"
       />
-      <section>
+      <section class="container__section">
         <input
-          name="custom_text"
-          maxlength="20"
+          class="container__section__input"
           placeholder="type here..."
           autofocus
         />
-        <span class="length">0 / 20</span>
+        <span class="container__section__counter"></span>
       </section>
-      <h6>Made with <span>&#x2764;</span> and coding skills</h6>
+      <h6 class="container__footer">
+        Made with <span class="container__footer__icon">&#x2764;</span> and
+        coding skills
+      </h6>
     </div>
   </body>
 </html>

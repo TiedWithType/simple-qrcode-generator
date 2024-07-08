@@ -18,6 +18,10 @@ body {
   display: flex;
   place-items: center;
   place-content: center;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $text;
+  }
 }
 
 .container {
@@ -43,6 +47,9 @@ body {
     @media screen and (min-width: 628px) {
       font-size: 28px;
     }
+    @media (prefers-color-scheme: dark) {
+      color: #fff;
+    }
   }
 
   &__footer {
@@ -53,6 +60,10 @@ body {
 
     @media screen and (min-width: 628px) {
       position: relative;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: #fff;
     }
 
     &__icon {
@@ -80,6 +91,10 @@ body {
       transition: linear 0.2s;
       color: $text;
 
+      @media (prefers-color-scheme: dark) {
+        color: #fff;
+      }
+
       &:focus {
         border-bottom-color: $primary;
       }
@@ -88,6 +103,9 @@ body {
     &__counter {
       text-align: center;
       font-size: 12px;
+      @media (prefers-color-scheme: dark) {
+        color: #fff;
+      }
     }
   }
 }

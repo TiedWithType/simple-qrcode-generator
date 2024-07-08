@@ -1,9 +1,8 @@
 import { DocumentEvents } from "./document.events";
-import { $, onEvents, createQrCode, updateCounter } from "./utils";
+import { $, onEvents, updateCounter, generateQRCode } from "./utils";
 
 @onEvents(".container__section__input")
 export class QrTextEvents {
-  private default = "null";
   private target: any;
   maxLength: number;
 
@@ -21,7 +20,9 @@ export class QrTextEvents {
     this.target.setAttribute("maxLength", this.maxLength);
     updateCounter(value.length, maxLength);
 
-    $("img").setAttribute("src", createQrCode(value, this.default));
+    generateQRCode(value).then(url => {
+      $('img').setAttribute('src', url);
+    });
 
     ["alt", "title"].forEach((attr) => {
       $("img").setAttribute(attr, value);

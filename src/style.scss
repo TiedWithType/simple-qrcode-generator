@@ -59,6 +59,7 @@ body {
     color: $text;
     position: fixed;
     bottom: 10px;
+    font-size: 12px;
 
     @media screen and (min-width: 628px) {
       position: relative;

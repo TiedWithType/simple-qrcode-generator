@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "moduleResolution": "Bundler",
     "module": "ESNext",
     "target": "ES6",
     "lib": ["DOM", "ESNext", "Decorators"],

@@ -41,7 +41,7 @@ export const classRunner = (list: Function[]) => [...list].forEach((e) => e);
 export const generateQRCode = async (
   text: string,
   initial: string = "null"
-): Promise<string> => {
+): Promise<any> => {
   try {
     const options = {
       width: "200",
@@ -50,7 +50,7 @@ export const generateQRCode = async (
       errorCorrectionLevel: "L",
     };
 
-    const url = await QRCode.toDataURL(text || initial, options);
+    const url = QRCode.toDataURL(text || initial, options);
     return url;
   } catch (error) {
     throw new Error(`Nie udało się wygenerować kodu QR: ${error}`);

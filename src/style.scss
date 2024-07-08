@@ -38,6 +38,8 @@ body {
   * {
     inline-size: 100%;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   &__header {
@@ -56,7 +58,7 @@ body {
     text-align: center;
     color: $text;
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
 
     @media screen and (min-width: 628px) {
       position: relative;

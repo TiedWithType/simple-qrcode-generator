@@ -1,12 +1,11 @@
-import { $, onEvents, createQrCode, updateCounter } from "./utils";
+import { $, onEvents, updateCounter } from "./utils";
 
 @onEvents("document")
 export class DocumentEvents {
-  DOMContentLoaded(self: Document) {
-    const maxLimit = 20;
+  public maxLimit = 30;
 
-    $("input").setAttribute("maxLength", maxLimit.toString());
-
-    updateCounter(0, maxLimit);
+  DOMContentLoaded() {
+    $("input").setAttribute("maxLength", this.maxLimit.toString());
+    updateCounter(0, this.maxLimit);
   }
 }

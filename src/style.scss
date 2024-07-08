@@ -38,8 +38,11 @@ body {
 
   &__header {
     text-align: center;
-    font-size: 28px;
+    font-size: 24px;
     color: $text;
+    @media screen and (min-width: 628px) {
+      font-size: 28px;
+    }
   }
 
   &__footer {
@@ -47,6 +50,10 @@ body {
     color: $text;
     position: fixed;
     bottom: 0;
+
+    @media screen and (min-width: 628px) {
+      position: relative;
+    }
 
     &__icon {
       color: $warning;

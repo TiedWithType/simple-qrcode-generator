@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [],
   build: {
     rollupOptions: {
-      external: ["qrcode"],
+      external: ["./node_modules/qrcode"],
     },
   },
 });

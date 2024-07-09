@@ -38,21 +38,10 @@ export const createQrCode = (data: string, initial: string = "null") =>
 
 export const classRunner = (list: Function[]) => [...list].forEach((e) => e);
 
-export const generateQRCode = async (
-  text: string,
-  initial: string = "null"
-): Promise<any> => {
-  try {
-    const options = {
-      width: "200",
-      height: "200",
-      margin: "1",
-      errorCorrectionLevel: "L",
-    };
-
-    const url = QRCode.toDataURL(text || initial, options);
-    return url;
-  } catch (error) {
-    throw new Error(`Nie udało się wygenerować kodu QR: ${error}`);
-  }
+export const generateQRCode = async (text: string) => {
+  return await QRCode.toDataURL(text, {
+    margin: 0.1,
+    errorCorrectionLevel: "L",
+    width: 400,
+  });
 };

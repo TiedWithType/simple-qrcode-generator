@@ -2,6 +2,7 @@ $primary: #3f51b5;
 $secondary: #ff5252;
 $warning: #f44336;
 $text: #212121;
+$theme: dark;
 
 :root {
   font-family: "Comfortaa", sans-serif;
@@ -19,7 +20,7 @@ body {
   place-items: center;
   place-content: center;
 
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: $theme) {
     background-color: $text;
   }
 }
@@ -49,8 +50,35 @@ body {
     @media screen and (min-width: 628px) {
       font-size: 28px;
     }
-    @media (prefers-color-scheme: dark) {
+    @media (prefers-color-scheme: $theme) {
       color: #fff;
+    }
+  }
+
+  &__options {
+    display: flex;
+    place-content: center;
+    place-items: center;
+
+    select {
+      font-family: inherit;
+      padding-block: 5px;
+      font-size: 14px;
+      border: 0;
+      border-bottom: solid 2px;
+      outline: none;
+      text-align: center;
+      background-color: transparent;
+      transition: linear 0.2s;
+      color: $text;
+
+      @media (prefers-color-scheme: $theme) {
+        color: #fff;
+      }
+
+      &:focus {
+        border-bottom-color: $primary;
+      }
     }
   }
 
@@ -65,7 +93,7 @@ body {
       position: relative;
     }
 
-    @media (prefers-color-scheme: dark) {
+    @media (prefers-color-scheme: $theme) {
       color: #fff;
     }
 
@@ -94,7 +122,7 @@ body {
       transition: linear 0.2s;
       color: $text;
 
-      @media (prefers-color-scheme: dark) {
+      @media (prefers-color-scheme: $theme) {
         color: #fff;
       }
 
@@ -106,7 +134,7 @@ body {
     &__counter {
       text-align: center;
       font-size: 12px;
-      @media (prefers-color-scheme: dark) {
+      @media (prefers-color-scheme: $theme) {
         color: #fff;
       }
     }

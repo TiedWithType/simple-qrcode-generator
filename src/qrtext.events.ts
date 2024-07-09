@@ -20,8 +20,8 @@ export class QrTextEvents {
     this.target.setAttribute("maxLength", this.maxLength);
     updateCounter(value.length, maxLength);
 
-    generateQRCode(value).then(url => {
-      $('img').setAttribute('src', url);
+    generateQRCode(value).then((url) => {
+      $("img").setAttribute("src", url);
     });
 
     ["alt", "title"].forEach((attr) => {

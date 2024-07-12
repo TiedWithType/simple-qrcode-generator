@@ -5,6 +5,28 @@ $warning: #f44336;
 $text: #212121;
 $theme: dark;
 
+$font-xsmall: 0.625rem; // 10px
+$font-small: 0.75rem; // 12px
+$font-medium: 0.875rem; // 14px
+$font-large: 1rem; // 16px
+$font-xlarge: 1.75rem; // 28px
+$font-xxlarge: 1.5rem; // 24px
+$gap-small: 0.625rem; // 10px
+$gap-medium: 1.25rem; // 20px
+$padding-small: 0.3125rem; // 5px
+$padding-medium: 0.625rem; // 10px
+$margin-bottom: 0.1875rem; // 3px
+
+$grid-column-width: 12.5rem; // 200px
+$min-width: 39.25rem; // 628px
+$inline-size-large: 37.5rem; // 600px
+
+@mixin flex-center {
+  display: flex;
+  place-items: center;
+  place-content: center;
+}
+
 :root {
   font-family: "Comfortaa", sans-serif;
   font-optical-sizing: auto;
@@ -17,9 +39,7 @@ body {
   block-size: 100%;
   margin: 0;
   padding: 0;
-  display: flex;
-  place-items: center;
-  place-content: center;
+  @include flex-center;
 
   @media (prefers-color-scheme: $theme) {
     background-color: $text;
@@ -28,13 +48,13 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 200px;
-  place-items: center;
+  grid-template-columns: $grid-column-width; // 200px
+  gap: $gap-medium; // 20px
   place-content: center;
-  gap: 20px;
+  place-items: center;
 
-  @media screen and (min-width: 628px) {
-    inline-size: 600px;
+  @media screen and (min-width: $min-width) {
+    inline-size: $inline-size-large; // 600px
   }
 
   * {
@@ -46,13 +66,31 @@ body {
 
   &__header {
     text-align: center;
-    font-size: 24px;
+    font-size: $font-xxlarge; // 24px
     color: $text;
-    @media screen and (min-width: 628px) {
-      font-size: 28px;
+
+    @media screen and (min-width: $min-width) {
+      font-size: $font-xlarge; // 28px
     }
+
     @media (prefers-color-scheme: $theme) {
       color: $light;
+    }
+  }
+
+  &__image {
+    scale: 1;
+    transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+
+    &:hover {
+      scale: 1.5;
+      transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+    }
+
+    @media screen and (min-width: $min-width) {
+      &:hover {
+        scale: 2;
+      }
     }
   }
 
@@ -60,10 +98,10 @@ body {
     text-align: center;
     color: $text;
     position: fixed;
-    bottom: 10px;
-    font-size: 12px;
+    bottom: $margin-bottom; // 3px
+    font-size: $font-small; // 12px
 
-    @media screen and (min-width: 628px) {
+    @media screen and (min-width: $min-width) {
       position: relative;
     }
 
@@ -73,26 +111,24 @@ body {
 
     &__icon {
       color: $warning;
-      font-size: 16px;
+      font-size: $font-medium; // 16px
       inline-size: min-content;
       display: inline;
-      margin-top: 4px;
+      margin-top: $padding-small; // 4px
     }
   }
 
   &__section {
-    display: flex;
+    @include flex-center;
     flex-direction: column;
-    place-items: center;
-    place-content: center;
-    gap: 10px;
+    gap: $gap-small; // 10px
 
     &__input {
       font-family: inherit;
-      padding-block: 5px;
-      font-size: 14px;
+      padding-block: $padding-small; // 5px
+      font-size: $font-medium; // 14px
       border: 0;
-      border-bottom: solid 2px;
+      border-bottom: solid 0.125rem; // 2px
       outline: none;
       text-align: center;
       background-color: transparent;
@@ -109,13 +145,11 @@ body {
     }
 
     &__button {
-      display: flex;
-      place-content: center;
-      place-items: center;
-      gap: 10px;
-      padding: 10px;
+      @include flex-center;
+      gap: $gap-small; // 20px
+      padding: $padding-medium; // 10px
       font-family: inherit;
-      border-radius: 5px;
+      border-radius: 0.3125rem; // 5px
       border: 0;
       background-color: $secondary;
       text-decoration: none;
@@ -124,14 +158,15 @@ body {
 
       &__text,
       &__icon {
-        font-size: 14px;
+        font-size: $font-medium; // 14px
         flex: 0;
       }
     }
 
     &__counter {
       text-align: center;
-      font-size: 12px;
+      font-size: $font-xsmall; // 12px
+
       @media (prefers-color-scheme: $theme) {
         color: $light;
       }

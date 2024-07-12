@@ -1,5 +1,3 @@
-import { DocumentEvents } from "./document.events";
-import { QrTextEvents } from "./qrtext.events";
-import { classRunner } from "./utils";
+import { DocumentComponent } from "./components/document.component";
 
-classRunner([DocumentEvents, QrTextEvents])
+new DocumentComponent().init();

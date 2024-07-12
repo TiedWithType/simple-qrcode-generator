@@ -19,6 +19,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="src/style.scss" />
+    <script
+      src="https://kit.fontawesome.com/5b0085ffe6.js"
+      type="module"
+      crossorigin="anonymous"
+    ></script>
     <script src="src/main.ts" type="module"></script>
     <title>Simple QR Code Generator</title>
   </head>
@@ -27,8 +32,8 @@
       <h1 class="container__header">Simple QR Code</h1>
       <img
         class="container__image"
-        width="200"
-        height="200"
+        width="auto"
+        height="auto"
         src="assets/placeholder.png"
         alt="placeholder"
         loading="eager"
@@ -41,9 +46,14 @@
           autofocus
         />
         <span class="container__section__counter"></span>
+        <a class="container__section__button">
+          <span class="container__section__button__text">Download</span>
+          <i class="container__section__button__icon fa-solid fa-circle-down"></i>
+        </a>
       </section>
       <h6 class="container__footer">
-        Made with <span class="container__footer__icon">&#x2764;</span> and
+        Made with
+        <span class="container__footer__icon fa-solid fa-heart"></span> and
         coding skills
       </h6>
     </div>

@@ -1,3 +1,4 @@
+$light: #ffffff;
 $primary: #3f51b5;
 $secondary: #ff5252;
 $warning: #f44336;
@@ -51,34 +52,7 @@ body {
       font-size: 28px;
     }
     @media (prefers-color-scheme: $theme) {
-      color: #fff;
-    }
-  }
-
-  &__options {
-    display: flex;
-    place-content: center;
-    place-items: center;
-
-    select {
-      font-family: inherit;
-      padding-block: 5px;
-      font-size: 14px;
-      border: 0;
-      border-bottom: solid 2px;
-      outline: none;
-      text-align: center;
-      background-color: transparent;
-      transition: linear 0.2s;
-      color: $text;
-
-      @media (prefers-color-scheme: $theme) {
-        color: #fff;
-      }
-
-      &:focus {
-        border-bottom-color: $primary;
-      }
+      color: $light;
     }
   }
 
@@ -94,12 +68,15 @@ body {
     }
 
     @media (prefers-color-scheme: $theme) {
-      color: #fff;
+      color: $light;
     }
 
     &__icon {
       color: $warning;
-      font-size: large;
+      font-size: 16px;
+      inline-size: min-content;
+      display: inline;
+      margin-top: 4px;
     }
   }
 
@@ -123,7 +100,7 @@ body {
       color: $text;
 
       @media (prefers-color-scheme: $theme) {
-        color: #fff;
+        color: $light;
       }
 
       &:focus {
@@ -131,11 +108,32 @@ body {
       }
     }
 
+    &__button {
+      display: flex;
+      place-content: center;
+      place-items: center;
+      gap: 10px;
+      padding: 10px;
+      font-family: inherit;
+      border-radius: 5px;
+      border: 0;
+      background-color: $secondary;
+      text-decoration: none;
+      color: $light;
+      cursor: pointer;
+
+      &__text,
+      &__icon {
+        font-size: 14px;
+        flex: 0;
+      }
+    }
+
     &__counter {
       text-align: center;
       font-size: 12px;
       @media (prefers-color-scheme: $theme) {
-        color: #fff;
+        color: $light;
       }
     }
   }

@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/node": "^20.14.10",
     "@types/qrcode": "^1.5.5",
+    "@vercel/speed-insights": "^1.0.12",
     "sass": "^1.77.6",
     "vite": "^5.3.3"
   },

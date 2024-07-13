@@ -1,7 +1,6 @@
 import { CounterComponent } from './counter.component';
 import { Settings } from "./document.component";
 import { Component } from "../component";
-import { updateCounter } from "../utils";
 import { ImageComponent } from "./image.component";
 
 @Component(".container__section__input")

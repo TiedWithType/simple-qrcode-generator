@@ -20,9 +20,10 @@ export class ImageComponent implements Component<HTMLImageElement> {
       margin: 0.1,
       errorCorrectionLevel: "L",
       width: 400,
+      type: "image/webp"
     });
 
     this.viewRef.setAttribute("src", blob);
-    this.viewRef.setAttribute("title", `${text}.png`);
+    this.viewRef.setAttribute("title", `${text}.webp`);
   };
 }

@@ -1,5 +1,3 @@
-import { classRunner } from "./utils";
-
 export const Component = (selector: string | Document): Function => {
   const viewRef: HTMLElement | Document =
     selector === document

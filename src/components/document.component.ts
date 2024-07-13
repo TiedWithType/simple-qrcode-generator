@@ -7,7 +7,7 @@ export class Settings {
   static default = "null";
 }
 
-@Component(document)
+@Component("document")
 export class DocumentComponent implements Component<Document> {
   viewRef: Document;
   inputComponent: InputComponent = new InputComponent();

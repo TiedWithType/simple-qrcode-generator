@@ -1,34 +1,31 @@
-export const Component = (selector: string | Document): Function => {
-  const viewRef: HTMLElement | Document =
-    selector === document
-      ? document
-      : (document.querySelector(selector as string) as HTMLElement);
+export const Component = (selector: string): ClassDecorator => {
+  return (target: any): any => {
+    return class extends target {
+      viewRef: HTMLElement | Document =
+        selector == "document"
+          ? document
+          : (document.querySelector(selector) as HTMLElement);
 
-  return (target: FunctionConstructor): Function => {
-    const newConstructor: any = function (...args: any[]) {
-      const instance = Reflect.construct(target, args);
-
-      if (!Reflect.has(instance, "viewRef")) {
-        Reflect.set(instance, "viewRef", viewRef);
+      attachEvent(key: string) {
+        this.viewRef.addEventListener(
+          key.replace(/Event/g, ""),
+          Reflect.get(this, key).bind(this)
+        );
       }
 
-      Reflect.ownKeys(target.prototype).forEach((key: string | symbol) => {
-        if (typeof key === "string" && key.includes("Event")) {
-          const eventHandler = instance[key].bind(instance);
-          viewRef.addEventListener(key.replace(/Event/g, ""), eventHandler);
-        }
-      });
+      mapEvents() {
+        Reflect.ownKeys(target.prototype)
+          .filter((key: string) => key.endsWith("Event"))
+          .forEach((key: string) => {
+            this.attachEvent(key);
+          });
+      }
 
-      Object.assign(instance, target.prototype);
-      Object.assign(instance, target);
-
-      return instance;
+      constructor(...args: any[]) {
+        super(...args);
+        this.mapEvents();
+      }
     };
-
-    newConstructor.prototype = Object.create(target.prototype);
-    newConstructor.prototype.constructor = newConstructor;
-
-    return newConstructor;
   };
 };
 

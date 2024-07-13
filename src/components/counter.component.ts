@@ -1,4 +1,3 @@
-import { InputComponent } from "./input.component";
 import { Component } from "../component";
 import { Settings } from "./document.component";
 

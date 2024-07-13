@@ -5,7 +5,6 @@ import { Settings } from "./document.component";
 @Component(".container__image")
 export class ImageComponent implements Component<HTMLImageElement> {
   viewRef: HTMLImageElement;
-  imageTitle: string;
 
   get title() {
     return this.viewRef.getAttribute("title");

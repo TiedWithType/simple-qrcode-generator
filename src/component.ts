@@ -1,10 +1,9 @@
 export const Component = (selector: string): ClassDecorator => {
   return (target: any): any => {
     return class extends target {
-      viewRef: HTMLElement | Document =
-        selector == "document"
-          ? document
-          : (document.querySelector(selector) as HTMLElement);
+      viewRef: HTMLElement | Document = selector.match("document")
+        ? document
+        : (document.querySelector(selector) as HTMLElement);
 
       attachEvent(key: string) {
         this.viewRef.addEventListener(

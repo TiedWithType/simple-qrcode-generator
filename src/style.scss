@@ -81,6 +81,10 @@ body {
   &__image {
     scale: 1;
     transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+    contain: content;
+    text-align: right;
+    font-size: $font-small;
+    color: $light;
 
     &:hover {
       scale: 1.5;

@@ -1,33 +1,37 @@
 export const Component = (selector: string): ClassDecorator => {
   return (target: any): any => {
-    return class extends target {
-      viewRef: HTMLElement | Document = selector.match("document")
-        ? document
-        : (document.querySelector(selector) as HTMLElement);
-
-      attachEvent(key: string) {
-        this.viewRef.addEventListener(
-          key.replace(/Event/g, ""),
-          Reflect.get(this, key).bind(this)
-        );
-      }
-
-      mapEvents() {
-        Reflect.ownKeys(target.prototype)
-          .filter((key: string) => key.endsWith("Event"))
-          .forEach((key: string) => {
-            this.attachEvent(key);
-          });
-      }
+    class ComponentConstructor extends target {
+      private _view: HTMLElement = document.querySelector(selector);
 
       constructor(...args: any[]) {
         super(...args);
-        this.mapEvents();
+        this.eventsMapper();
       }
-    };
+
+      protected get viewRef(): HTMLElement {
+        return this._view;
+      }
+
+      private eventBind(eventName: string): void {
+        this.viewRef.addEventListener(
+          eventName.replace(/Event/g, ""),
+          Reflect.get(this, eventName).bind(this)
+        );
+      }
+
+      private eventsMapper(): void {
+        Reflect.ownKeys(target.prototype)
+          .filter((propertyKey: string) => propertyKey.endsWith("Event"))
+          .forEach((propertyKey: string) => {
+            this.eventBind(propertyKey);
+          });
+      }
+    }
+
+    return ComponentConstructor;
   };
 };
 
-export interface Component<T> {
+export interface Component<T = HTMLElement> {
   viewRef: T;
 }

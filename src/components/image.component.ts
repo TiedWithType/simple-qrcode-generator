@@ -15,7 +15,7 @@ export class ImageComponent implements Component<HTMLImageElement> {
   }
 
   generateQRCode = async (text: string) => {
-    let blob = await QRCode.toDataURL(text || Settings.default, {
+    const blob = await QRCode.toDataURL(text || Settings.default, {
       margin: 0.1,
       errorCorrectionLevel: "L",
       width: 400,

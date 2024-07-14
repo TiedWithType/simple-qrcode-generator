@@ -2,9 +2,12 @@
   "compilerOptions": {
     "moduleResolution": "Bundler",
     "module": "ESNext",
-    "target": "ESNext",
+    "target": "ES2020",
     "lib": ["DOM", "ESNext", "Decorators"],
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "ignoreDeprecations": "5.0",
+    "strict": false,
   },
   "include": ["src"]
 }

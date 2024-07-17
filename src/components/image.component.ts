@@ -2,7 +2,7 @@ import QRCode from "qrcode";
 import { Component } from "../component";
 import { Settings } from "./document.component";
 
-@Component(".container__image")
+@Component({selector:".container__image"})
 export class ImageComponent implements Component<HTMLImageElement> {
   viewRef: HTMLImageElement;
 

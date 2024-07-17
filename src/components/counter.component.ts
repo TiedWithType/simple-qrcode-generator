@@ -1,7 +1,7 @@
 import { Component } from "../component";
 import { Settings } from "./document.component";
 
-@Component(".container__section__counter")
+@Component({selector: ".container__section__counter"})
 export class CounterComponent implements Component<HTMLSpanElement> {
   viewRef: HTMLSpanElement;
 

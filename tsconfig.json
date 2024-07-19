@@ -6,7 +6,6 @@
     "lib": ["DOM", "ESNext", "Decorators"],
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "ignoreDeprecations": "5.0",
     "strict": false,
   },
   "include": ["src"]

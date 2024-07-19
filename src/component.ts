@@ -17,9 +17,7 @@ export const Component = (options: ComponentOptions): Function => {
         this.eventsMapper();
       }
 
-      protected get viewRef(): HTMLElement {
-        return document.querySelector(options.selector);
-      }
+      viewRef: HTMLElement = document.querySelector(options.selector);
 
       private eventBind(eventName: string): void {
         this.viewRef.addEventListener(

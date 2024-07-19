@@ -1,5 +1,5 @@
 import { Component } from "../component";
-import { Settings } from "./document.component";
+import { Settings } from "./app-root.component";
 import { ImageComponent } from "./image.component";
 
 @Component({
@@ -7,12 +7,10 @@ import { ImageComponent } from "./image.component";
   inject: [ImageComponent],
 })
 export class DownloadComponent implements Component<HTMLAnchorElement> {
-  viewRef: HTMLAnchorElement;
-  image: ImageComponent;
-
-  constructor(imageComponent: ImageComponent) {
-    this.image = imageComponent;
-  }
+  constructor(
+    private imageComponent: ImageComponent,
+    public viewRef: HTMLAnchorElement
+  ) {}
 
   stateControl(state: string) {
     if (state == "enabled") {
@@ -26,10 +24,10 @@ export class DownloadComponent implements Component<HTMLAnchorElement> {
 
   protected clickEvent() {
     if (this.viewRef.getAttribute("canDownload") === "true") {
-      this.viewRef.setAttribute("href", this.image.src);
+      this.viewRef.setAttribute("href", this.imageComponent.attribute('src'));
       this.viewRef.setAttribute(
         "download",
-        `${this.image.title || Settings.default}`
+        `${this.imageComponent.attribute('title') || Settings.default}`
       );
     } else {
       this.viewRef.removeAttribute("href");

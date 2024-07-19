@@ -1,26 +1,26 @@
 export type Constructor<T extends Function> = new (...args: any[]) => T;
 
 export interface Component<T = HTMLElement> {
-  viewRef: T;
+  view: T;
 }
 
 interface ComponentOptions {
   selector: string;
-  inject?: Function[];
+  dependencies?: Function[];
 }
 
 export const Component = (options: ComponentOptions): Function => {
-  return (target: Constructor<Function>) => {
-    const ComponentConstructor = class extends target {
+  return (target: Constructor<FunctionConstructor>) => {
+    const ComponentConstructor = class extends target implements Component {
       constructor(...args: any[]) {
         super(...args);
         this.eventsMapper();
       }
 
-      viewRef: HTMLElement = document.querySelector(options.selector);
+      view: HTMLElement = document.querySelector(options.selector);
 
       private eventBind(eventName: string): void {
-        this.viewRef.addEventListener(
+        this.view.addEventListener(
           eventName.replace(/Event/g, ""),
           (Reflect.get(this, eventName) as Function).bind(this)
         );
@@ -37,7 +37,7 @@ export const Component = (options: ComponentOptions): Function => {
 
     return Reflect.construct(
       ComponentConstructor,
-      (options.inject || []).map((inject) => inject)
+      (options.dependencies || []).map((inject) => inject)
     );
   };
 };

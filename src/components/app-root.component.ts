@@ -1,6 +1,6 @@
-import { InputComponent } from "./input.component";
-import { Component } from "../component";
-import { DownloadComponent } from "./download.component";
+import { Component } from "@core/component";
+import { DownloadComponent } from "@components/download.component";
+import { InputComponent } from "@components/input.component";
 import { QRCodeToDataURLOptions } from "qrcode";
 
 export class Settings {
@@ -14,11 +14,14 @@ export class Settings {
   };
 }
 
-@Component({ selector: "body", inject: [DownloadComponent, InputComponent] })
+@Component({
+  selector: "body",
+  dependencies: [DownloadComponent, InputComponent],
+})
 export class AppRootComponent implements Component<HTMLBodyElement> {
   constructor(
     private downloadComponent: DownloadComponent,
-    public viewRef: HTMLBodyElement
+    public view: HTMLBodyElement
   ) {
     this.downloadComponent.stateControl("disabled");
   }

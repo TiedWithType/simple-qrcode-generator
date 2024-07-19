@@ -1,27 +1,26 @@
-import { CounterComponent } from "./counter.component";
-import { Settings } from "./app-root.component";
-import { Component } from "../component";
-import { ImageComponent } from "./image.component";
-import { DownloadComponent } from "./download.component";
+import { Component } from "@core/component";
+import { Settings } from "@components/app-root.component";
+import { CounterComponent } from "@components/counter.component";
+import { ImageComponent } from "@components/image.component";
+import { DownloadComponent } from "@components/download.component";
 
 @Component({
   selector: ".container__section__input",
-  inject: [CounterComponent, ImageComponent, DownloadComponent],
+  dependencies: [CounterComponent, ImageComponent, DownloadComponent],
 })
 export class InputComponent implements Component<HTMLInputElement> {
-
   constructor(
     private counterComponent: CounterComponent,
     private imageComponent: ImageComponent,
     private download: DownloadComponent,
-    public viewRef: HTMLInputElement
+    public view: HTMLInputElement
   ) {}
 
   public inputControl() {
-    this.viewRef.setAttribute("maxLength", `${Settings.maxLimit}`);
-    this.counterComponent.update(this.viewRef.value.length);
+    this.view.setAttribute("maxLength", `${Settings.maxLimit}`);
+    this.counterComponent.update(this.view.value.length);
 
-    this.viewRef.value.length > 0
+    this.view.value.length > 0
       ? this.download.stateControl("enabled")
       : this.download.stateControl("disabled");
   }
@@ -32,6 +31,6 @@ export class InputComponent implements Component<HTMLInputElement> {
 
   protected inputEvent() {
     this.inputControl();
-    this.imageComponent.generateQRCode(this.viewRef.value);
+    this.imageComponent.generateQRCode(this.view.value);
   }
 }

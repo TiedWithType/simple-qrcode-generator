@@ -1,11 +1,11 @@
-import { Component } from "../component";
-import { Settings } from "./app-root.component";
+import { Component } from "@core/component";
+import { Settings } from "@components/app-root.component";
 
 @Component({ selector: ".container__section__counter" })
 export class CounterComponent implements Component<HTMLSpanElement> {
-  constructor(public viewRef: HTMLSpanElement) {}
+  constructor(public view: HTMLSpanElement) {}
 
   update(current: number = 0) {
-    this.viewRef.textContent = `${current} / ${Settings.maxLimit}`;
+    this.view.textContent = `${current} / ${Settings.maxLimit}`;
   }
 }

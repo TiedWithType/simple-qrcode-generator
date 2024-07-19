@@ -91,7 +91,7 @@ body {
 
     &:hover {
       scale: 1.5;
-      transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+      transition: cubic-bezier(0.19, 1, 0.22, 1) .5s;
     }
 
     @media (prefers-color-scheme: $theme) {

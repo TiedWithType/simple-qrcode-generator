@@ -1,8 +1,9 @@
 $light: #ffffff;
-$primary: #3f51b5;
-$secondary: #ff5252;
+$primary: #4CAF50;
+$secondary: #448AFF;
 $warning: #f44336;
 $text: #212121;
+$divided: #757575;
 $theme: dark;
 
 $font-xsmall: 0.625rem; // 10px
@@ -87,11 +88,11 @@ body {
     color: $light;
 
     border: solid 4px #000000;
-    border-radius: 0.3125rem;
+    border-radius: $padding-small;
 
     &:hover {
       scale: 1.5;
-      transition: cubic-bezier(0.19, 1, 0.22, 1) .5s;
+      transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
     }
 
     @media (prefers-color-scheme: $theme) {
@@ -160,16 +161,16 @@ body {
       gap: $gap-small; // 20px
       padding: $padding-medium; // 10px
       font-family: inherit;
-      border-radius: 0.3125rem; // 5px
+      border-radius: $padding-small; // 5px
       border: 0;
-      background-color: $secondary;
+      background-color: $divided;
       text-decoration: none;
       color: $light;
       cursor: pointer;
       transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
 
-      &__disabled {
-        background-color: lighten($text, 50);
+      &__enabled {
+        background-color: $secondary;
       }
 
       &__text,

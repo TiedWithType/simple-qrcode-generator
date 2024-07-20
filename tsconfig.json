@@ -11,7 +11,8 @@
     "paths": {
       "@core/*": ["core/*"],
       "@assets/*": ["assets/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@service/*": ["src/service/*"]
     }
   },
   "include": ["src"]

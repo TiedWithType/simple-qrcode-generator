@@ -1,8 +1,8 @@
 import { Component } from "@core/component";
-import { Settings } from "@components/app-root.component";
 import { CounterComponent } from "@components/counter.component";
 import { ImageComponent } from "@components/image.component";
 import { DownloadComponent } from "@components/download.component";
+import { Settings } from "@service/settings.service";
 
 @Component({
   selector: ".container__section__input",
@@ -21,7 +21,7 @@ export class InputComponent implements Component<HTMLInputElement> {
     this.counterComponent.update(this.view.value.length);
 
     this.view.value.length > 0
-      ? this.download.stateControl("enabled")
+      ? (this.download.stateControl("enabled"))
       : this.download.stateControl("disabled");
   }
 
@@ -29,8 +29,8 @@ export class InputComponent implements Component<HTMLInputElement> {
     this.inputControl();
   }
 
-  protected inputEvent() {
+  protected async inputEvent() {
+    await this.imageComponent.generateQRCode(this.view.value);
     this.inputControl();
-    this.imageComponent.generateQRCode(this.view.value);
   }
 }

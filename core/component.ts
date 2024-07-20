@@ -35,9 +35,6 @@ export const Component = (options: ComponentOptions): Function => {
       }
     };
 
-    return Reflect.construct(
-      ComponentConstructor,
-      (options.dependencies || []).map((inject) => inject)
-    );
+    return Reflect.construct(ComponentConstructor, options.dependencies || []);
   };
 };

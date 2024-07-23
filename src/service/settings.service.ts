@@ -1,9 +1,11 @@
+import { Service } from '@core/service';
 import { QRCodeToDataURLOptions } from "qrcode";
 
+@Service
 export class Settings {
-  static maxLimit = 50;
-  static default = "null";
-  static imageConfig: QRCodeToDataURLOptions = {
+   maxLimit = 50;
+   default = "null";
+   imageConfig: QRCodeToDataURLOptions = {
     margin: 1,
     errorCorrectionLevel: "L",
     width: 250,

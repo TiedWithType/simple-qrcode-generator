@@ -13,11 +13,14 @@ export class InputComponent implements Component<HTMLInputElement> {
     private counterComponent: CounterComponent,
     private imageComponent: ImageComponent,
     private download: DownloadComponent,
+    private settings: Settings,
     public view: HTMLInputElement
-  ) {}
+  ) {
+    this.settings = new Settings();
+  }
 
   public inputControl() {
-    this.view.setAttribute("maxLength", `${Settings.maxLimit}`);
+    this.view.setAttribute("maxLength", `${this.settings.maxLimit}`);
     this.counterComponent.update(this.view.value.length);
 
     this.view.value.length > 0

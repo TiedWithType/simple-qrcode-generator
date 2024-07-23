@@ -1,3 +1,5 @@
+import { Service } from "./service";
+
 export interface Component<T = HTMLElement> {
   view: T;
 }
@@ -9,6 +11,8 @@ interface ComponentOptions {
 
 export const Component = (options: ComponentOptions): Function => {
   return (target: FunctionConstructor): Function => {
+    Reflect.set(target.prototype, "name", target.name);
+
     const ownKeys: (string | symbol)[] = Reflect.ownKeys(
       target.prototype
     ).filter(
@@ -16,12 +20,24 @@ export const Component = (options: ComponentOptions): Function => {
         typeof propertyKey === "string" && propertyKey.endsWith("Event")
     );
 
+    @Service
     class RootComponent extends target implements Component {
       view: HTMLElement;
 
       constructor(...args: any[]) {
         super(...args);
         this.onInit();
+
+        return new Proxy(this, {
+          get: (target, key, receiver) => {
+            if (target["render"]) target["render"]();
+            return Reflect.get(target, key, receiver);
+          },
+          set: (target, key, value, receiver) => {
+            if (target["render"]) target["render"]();
+            return Reflect.set(target, key, value, receiver);
+          },
+        });
       }
 
       async onInit(): Promise<void> {

@@ -12,6 +12,6 @@ export class AppRootComponent implements Component<HTMLBodyElement> {
     private downloadComponent: DownloadComponent,
     public view: HTMLBodyElement
   ) {
-    this.downloadComponent.stateControl("disabled");
+    this.downloadComponent.enableDownload(false);
   }
 }

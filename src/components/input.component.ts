@@ -22,10 +22,8 @@ export class InputComponent implements Component<HTMLInputElement> {
   public inputControl() {
     this.view.setAttribute("maxLength", `${this.settings.maxLimit}`);
     this.counterComponent.update(this.view.value.length);
-
-    this.view.value.length > 0
-      ? (this.download.stateControl("enabled"))
-      : this.download.stateControl("disabled");
+    
+    this.download.enableDownload(!this.view.validity.valueMissing)
   }
 
   protected focusEvent() {

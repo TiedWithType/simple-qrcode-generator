@@ -173,8 +173,7 @@ body {
         background-color: $secondary;
       }
 
-      &__text,
-      &__icon {
+      &__text {
         font-size: $font-medium; // 14px
         flex: 0;
       }

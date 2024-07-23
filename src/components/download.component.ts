@@ -8,21 +8,18 @@ import { ImageComponent } from "@components/image.component";
 export class DownloadComponent implements Component<HTMLAnchorElement> {
   constructor(
     private imageComponent: ImageComponent,
+    private stateClass: string,
     public view: HTMLAnchorElement
-  ) {}
+  ) {
+    this.stateClass = 'container__section__button__enabled';
+  }
 
-  stateControl(state: string) {
-    if (state == "enabled") {
-      this.view.classList.add("container__section__button__enabled");
-      this.view.setAttribute("candownload", "true");
-    } else if (state == "disabled") {
-      this.view.classList.remove("container__section__button__enabled");
-      this.view.setAttribute("candownload", "false");
-    }
+  enableDownload(state: boolean) {
+    this.view.classList.toggle(this.stateClass, state)
   }
 
   protected clickEvent() {
-    this.view.getAttribute("candownload") === "true"
+    this.view.classList.contains(this.stateClass)
       ? Object.assign(this.view, {
           href: this.imageComponent.view.getAttribute("src"),
           download: this.imageComponent.view.getAttribute("title"),

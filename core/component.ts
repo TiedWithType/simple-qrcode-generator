@@ -1,5 +1,3 @@
-export type Constructor<T extends Function> = new (...args: any[]) => T;
-
 export interface Component<T = HTMLElement> {
   view: T;
 }
@@ -10,31 +8,49 @@ interface ComponentOptions {
 }
 
 export const Component = (options: ComponentOptions): Function => {
-  return (target: Constructor<FunctionConstructor>) => {
-    const ComponentConstructor = class extends target implements Component {
+  return (target: FunctionConstructor): Function => {
+    const ownKeys: (string | symbol)[] = Reflect.ownKeys(
+      target.prototype
+    ).filter(
+      (propertyKey: string) =>
+        typeof propertyKey === "string" && propertyKey.endsWith("Event")
+    );
+
+    class RootComponent extends target implements Component {
+      view: HTMLElement;
+
       constructor(...args: any[]) {
         super(...args);
-        this.eventsMapper();
+        this.onInit();
       }
 
-      view: HTMLElement = document.querySelector(options.selector);
+      async onInit(): Promise<void> {
+        try {
+          this.view = document.querySelector(options.selector);
 
-      private eventBind(eventName: string): void {
+          if (!this.view)
+            throw Error(`${options.selector} is not a valid selector!`);
+
+          await this.eventsMapper();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      private async eventBind(eventName: string): Promise<void> {
         this.view.addEventListener(
           eventName.replace(/Event/g, ""),
           (Reflect.get(this, eventName) as Function).bind(this)
         );
       }
 
-      private eventsMapper(): void {
-        Reflect.ownKeys(target.prototype)
-          .filter((propertyKey: string) => propertyKey.endsWith("Event"))
-          .forEach((propertyKey: string) => {
-            this.eventBind(propertyKey);
-          });
+      private async eventsMapper(): Promise<void> {
+        await Promise.all(
+          ownKeys.map((propertyKey: string) => this.eventBind(propertyKey))
+        );
       }
-    };
+    }
 
-    return Reflect.construct(ComponentConstructor, options.dependencies || []);
+    return Reflect.construct(RootComponent, options.dependencies || []);
   };
 };

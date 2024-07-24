@@ -20,6 +20,15 @@ export class InputComponent implements Component<HTMLInputElement> {
     this.settings = new Settings();
   }
 
+  generatePlaceholder(): void {
+    this.view.setAttribute(
+      "placeholder",
+      this.settings.placeholders[
+        Math.floor(Math.random() * this.settings.placeholders.length)
+      ]
+    );
+  }
+
   public inputControl() {
     this.view.setAttribute("maxLength", `${this.settings.maxLimit}`);
     this.counterComponent.update(this.view.value.length);
@@ -29,6 +38,7 @@ export class InputComponent implements Component<HTMLInputElement> {
 
   @EventEmitter("focus") protected handleFocus() {
     this.inputControl();
+    this.generatePlaceholder();
   }
 
   @EventEmitter("input") protected async handleInput() {

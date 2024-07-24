@@ -1,6 +1,6 @@
 $light: #ffffff;
-$primary: #4CAF50;
-$secondary: #448AFF;
+$primary: #3F51B5;
+$secondary: #FF4081;
 $warning: #f44336;
 $text: #212121;
 $divided: #757575;
@@ -153,7 +153,7 @@ body {
       }
 
       &:focus {
-        border-bottom-color: $primary;
+        border-bottom-color: $secondary;
       }
     }
 
@@ -171,7 +171,7 @@ body {
       transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
 
       &[data-enabled] {
-        background-color: $secondary;
+        background-color: $primary;
       }
 
       &__text {

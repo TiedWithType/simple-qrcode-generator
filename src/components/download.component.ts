@@ -1,5 +1,6 @@
 import { Component } from "@core/component";
 import { ImageComponent } from "@components/image.component";
+import { EventEmitter } from "@core/event.emitter";
 
 @Component({
   selector: ".container__section__button",
@@ -8,18 +9,15 @@ import { ImageComponent } from "@components/image.component";
 export class DownloadComponent implements Component<HTMLAnchorElement> {
   constructor(
     private imageComponent: ImageComponent,
-    private stateClass: string,
     public view: HTMLAnchorElement
-  ) {
-    this.stateClass = 'container__section__button__enabled';
-  }
+  ) {}
 
   enableDownload(state: boolean) {
-    this.view.classList.toggle(this.stateClass, state)
+    this.view.toggleAttribute("data-enabled", state);
   }
 
-  protected clickEvent() {
-    this.view.classList.contains(this.stateClass)
+  @EventEmitter('click') protected handleClick() {
+    this.view.getAttribute("data-enabled") !== null
       ? Object.assign(this.view, {
           href: this.imageComponent.view.getAttribute("src"),
           download: this.imageComponent.view.getAttribute("title"),

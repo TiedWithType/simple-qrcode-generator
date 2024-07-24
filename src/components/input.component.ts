@@ -3,6 +3,7 @@ import { CounterComponent } from "@components/counter.component";
 import { ImageComponent } from "@components/image.component";
 import { DownloadComponent } from "@components/download.component";
 import { Settings } from "@service/settings.service";
+import { EventEmitter } from "@core/event.emitter";
 
 @Component({
   selector: ".container__section__input",
@@ -22,15 +23,15 @@ export class InputComponent implements Component<HTMLInputElement> {
   public inputControl() {
     this.view.setAttribute("maxLength", `${this.settings.maxLimit}`);
     this.counterComponent.update(this.view.value.length);
-    
-    this.download.enableDownload(!this.view.validity.valueMissing)
+
+    this.download.enableDownload(!this.view.validity.valueMissing);
   }
 
-  protected focusEvent() {
+  @EventEmitter("focus") protected handleFocus() {
     this.inputControl();
   }
 
-  protected async inputEvent() {
+  @EventEmitter("input") protected async handleInput() {
     await this.imageComponent.generateQRCode(this.view.value);
     this.inputControl();
   }

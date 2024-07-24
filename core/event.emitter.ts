@@ -43,8 +43,8 @@ export interface EventName {
 
 export const EventEmitter = (eventName: keyof EventName): MethodDecorator => {
   return (target: object, key: string | symbol) => {
-    Reflect.defineProperty(target, `${String(eventName)}Event`, {
-      value: target[key],
+    Reflect.defineProperty(target, `${String(eventName)}EventEmitter`, {
+      value: Reflect.get(target, key),
       enumerable: true,
       configurable: true,
     });

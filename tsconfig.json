@@ -15,5 +15,5 @@
       "@service/*": ["src/service/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "core", "tests"]
 }

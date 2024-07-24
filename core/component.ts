@@ -15,10 +15,7 @@ export const Component = (options: ComponentOptions): Function => {
 
     const ownKeys: (string | symbol)[] = Reflect.ownKeys(
       target.prototype
-    ).filter(
-      (propertyKey: string) =>
-        typeof propertyKey === "string" && propertyKey.endsWith("Event")
-    );
+    ).filter((propertyKey: string) => propertyKey.endsWith("EventEmitter"));
 
     @Service
     class RootComponent extends target implements Component {
@@ -27,17 +24,6 @@ export const Component = (options: ComponentOptions): Function => {
       constructor(...args: any[]) {
         super(...args);
         this.onInit();
-
-        return new Proxy(this, {
-          get: (target, key, receiver) => {
-            if (target["render"]) target["render"]();
-            return Reflect.get(target, key, receiver);
-          },
-          set: (target, key, value, receiver) => {
-            if (target["render"]) target["render"]();
-            return Reflect.set(target, key, value, receiver);
-          },
-        });
       }
 
       async onInit(): Promise<void> {
@@ -55,7 +41,7 @@ export const Component = (options: ComponentOptions): Function => {
 
       private async eventBind(eventName: string): Promise<void> {
         this.view.addEventListener(
-          eventName.replace(/Event/g, ""),
+          eventName.replace(/EventEmitter/g, ""),
           (Reflect.get(this, eventName) as Function).bind(this)
         );
       }

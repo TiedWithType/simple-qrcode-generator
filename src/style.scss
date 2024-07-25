@@ -1,6 +1,6 @@
 $light: #ffffff;
-$primary: #3F51B5;
-$secondary: #FF4081;
+$primary: #3f51b5;
+$secondary: #ff4081;
 $warning: #f44336;
 $text: #212121;
 $divided: #757575;
@@ -17,7 +17,6 @@ $gap-medium: 1.25rem; // 20px
 $padding-small: 0.3125rem; // 5px
 $padding-medium: 0.625rem; // 10px
 $margin-bottom: 0.1875rem; // 3px
-
 $grid-column-width: 12.5rem; // 200px
 $min-width: 39.25rem; // 628px
 $inline-size-large: 37.5rem; // 600px
@@ -98,12 +97,6 @@ body {
 
     @media (prefers-color-scheme: $theme) {
       border: 0;
-    }
-
-    @media screen and (min-width: $min-width) {
-      &:hover {
-        scale: 2;
-      }
     }
   }
 

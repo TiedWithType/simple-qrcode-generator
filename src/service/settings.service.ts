@@ -7,9 +7,10 @@ export class Settings {
   default = "null";
   imageConfig: QRCodeToDataURLOptions = {
     margin: 1,
-    errorCorrectionLevel: "L",
+    errorCorrectionLevel: "H",
     width: 250,
     type: "image/webp",
+   
   };
   placeholders: string[] = [
     "Oops! Something missing :(",

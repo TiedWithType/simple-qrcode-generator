@@ -1,46 +1,15 @@
-$light: #ffffff;
-$primary: #3f51b5;
-$secondary: #ff4081;
-$warning: #f44336;
-$text: #212121;
-$divided: #757575;
-$theme: dark;
-
-$font-xsmall: 0.625rem; // 10px
-$font-small: 0.75rem; // 12px
-$font-medium: 0.875rem; // 14px
-$font-large: 1rem; // 16px
-$font-xlarge: 1.75rem; // 28px
-$font-xxlarge: 1.5rem; // 24px
-$gap-small: 0.625rem; // 10px
-$gap-medium: 1.25rem; // 20px
-$padding-small: 0.3125rem; // 5px
-$padding-medium: 0.625rem; // 10px
-$margin-bottom: 0.1875rem; // 3px
-$grid-column-width: 12.5rem; // 200px
-$min-width: 39.25rem; // 628px
-$inline-size-large: 37.5rem; // 600px
-
-@mixin flex-center {
-  display: flex;
-  place-items: center;
-  place-content: center;
-}
+@import "./styles/__variables";
+@import "./styles/_mixins";
 
 :root {
-  font-family: "Comfortaa", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  user-select: none;
+  @include font-face("Comfortaa");
 }
 
 html,
 body {
-  block-size: 100%;
-  margin: 0;
-  padding: 0;
-  @include flex-center;
+  block-size: $full-size;
+  @include no-space;
+  @include display-center(flex, column);
 
   @media (prefers-color-scheme: $theme) {
     background-color: $text;
@@ -48,31 +17,20 @@ body {
 }
 
 .container {
-  display: grid;
-  grid-template-columns: $grid-column-width; // 200px
-  gap: $gap-medium; // 20px
-  place-content: center;
-  place-items: center;
-
-  @media screen and (min-width: $min-width) {
-    inline-size: $inline-size-large; // 600px
-  }
+  @include display-center(grid);
+  grid-template-columns: $grid-column-width;
+  gap: $gap-medium;
 
   * {
-    inline-size: 100%;
+    inline-size: $full-size;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    @include no-space;
   }
 
   &__header {
     text-align: center;
-    font-size: $font-xxlarge; // 24px
+    font-size: $font-xlarge;
     color: $text;
-
-    @media screen and (min-width: $min-width) {
-      font-size: $font-xlarge; // 28px
-    }
 
     @media (prefers-color-scheme: $theme) {
       color: $light;
@@ -81,18 +39,18 @@ body {
 
   &__image {
     scale: 1;
-    transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+    transition: $custom-transition;
     contain: content;
     text-align: right;
     font-size: $font-small;
     color: $light;
 
-    border: solid 4px #000000;
+    border: solid 4px $text;
     border-radius: $padding-small;
 
     &:hover {
       scale: 1.5;
-      transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+      transition: $custom-transition;
     }
 
     @media (prefers-color-scheme: $theme) {
@@ -101,11 +59,13 @@ body {
   }
 
   &__footer {
+    @include display-center(flex);
     text-align: center;
     color: $text;
+    font-size: $font-small;
     position: fixed;
-    bottom: $margin-bottom; // 3px
-    font-size: $font-small; // 12px
+    bottom: $margin-bottom;
+    inline-size: $grid-column-width;
 
     @media screen and (min-width: $min-width) {
       position: relative;
@@ -117,10 +77,8 @@ body {
 
     &__icon {
       color: $warning;
-      font-size: $font-medium; // 16px
-      inline-size: min-content;
-      display: inline;
-      margin-top: $padding-small; // 4px
+      font-size: $font-large;
+      flex: 1;
     }
   }
 
@@ -131,10 +89,10 @@ body {
 
     &__input {
       font-family: inherit;
-      padding-block: $padding-small; // 5px
-      font-size: $font-medium; // 14px
+      padding-block: $padding-small;
+      font-size: $font-medium;
       border: 0;
-      border-bottom: solid 0.125rem; // 2px
+      border-bottom: solid 0.125rem;
       outline: none;
       text-align: center;
       background-color: transparent;
@@ -151,31 +109,26 @@ body {
     }
 
     &__button {
-      @include flex-center;
-      gap: $gap-small; // 20px
-      padding: $padding-medium; // 10px
+      padding: $padding-medium;
       font-family: inherit;
-      border-radius: $padding-small; // 5px
+      border-radius: $padding-small;
       border: 0;
       background-color: $divided;
       text-decoration: none;
       color: $light;
       cursor: pointer;
-      transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+      transition: $custom-transition;
+       font-size: $font-medium;
+        text-align: center;
 
       &[data-enabled] {
         background-color: $primary;
-      }
-
-      &__text {
-        font-size: $font-medium; // 14px
-        flex: 0;
       }
     }
 
     &__counter {
       text-align: center;
-      font-size: $font-xsmall; // 12px
+      font-size: $font-xsmall;
 
       @media (prefers-color-scheme: $theme) {
         color: $light;

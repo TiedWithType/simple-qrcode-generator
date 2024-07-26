@@ -77,15 +77,15 @@ body {
 
     &__icon {
       color: $warning;
-      font-size: $font-large;
+      font-size: 1.25rem;
+      line-height: $font-large;
       flex: 1;
     }
   }
 
   &__section {
-    @include flex-center;
-    flex-direction: column;
-    gap: $gap-small; // 10px
+    @include display-center(flex, column);
+    gap: $gap-small;
 
     &__input {
       font-family: inherit;
@@ -118,8 +118,8 @@ body {
       color: $light;
       cursor: pointer;
       transition: $custom-transition;
-       font-size: $font-medium;
-        text-align: center;
+      font-size: $font-medium;
+      text-align: center;
 
       &[data-enabled] {
         background-color: $primary;

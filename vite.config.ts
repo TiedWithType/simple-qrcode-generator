@@ -7,6 +7,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: ["./node_modules/qrcode"],
+      output: {
+        assetFileNames: `assets/[name].[ext]`,
+      },
     },
   },
 });

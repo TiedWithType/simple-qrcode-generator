@@ -16,8 +16,8 @@ export class ImageComponent implements Component<HTMLImageElement> {
     );
 
       Object.assign(this.view, {
-        src: text ? blob : 'assets/null.webp',
-        title: text ? `${text}.webp` : 'null.webp',
+        src: text.length > 0 ? blob : 'assets/null.webp',
+        title: text.length > 0 ? `${text}.webp` : 'null.webp',
       });
     
   };

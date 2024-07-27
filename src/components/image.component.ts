@@ -15,10 +15,11 @@ export class ImageComponent implements Component<HTMLImageElement> {
       this.settings.imageConfig
     );
 
-    Object.assign(this.view, {
-      src: blob,
-      title: `${text}.webp`,
-    });
+      Object.assign(this.view, {
+        src: text ? blob : '/assets/null.webp',
+        title: text ? `${text}.webp` : 'null.webp',
+      });
+    
   };
 
   @EventEmitter("contextmenu") protected handleContextMenu(event: PointerEvent) {

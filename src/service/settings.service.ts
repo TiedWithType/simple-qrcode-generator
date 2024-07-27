@@ -7,7 +7,7 @@ export class Settings {
   default = "null";
   imageConfig: QRCodeToDataURLOptions = {
     margin: 1,
-    errorCorrectionLevel: "H",
+    errorCorrectionLevel: "Q",
     width: 250,
     type: "image/webp",
    

@@ -8,7 +8,12 @@ export default defineConfig({
     rollupOptions: {
       external: ["./node_modules/qrcode"],
       output: {
-        assetFileNames: `assets/[name].[ext]`,
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith(".webp")) {
+            return "assets/[name].[ext]";
+          }
+          return `assets/[name]-[hash].[extname]`;
+        },
       },
     },
   },

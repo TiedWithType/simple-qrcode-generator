@@ -12,7 +12,7 @@ export default defineConfig({
           if (assetInfo.name && assetInfo.name.endsWith(".webp")) {
             return "assets/[name].[ext]";
           }
-          return `assets/[name]-[hash].[extname]`;
+          return `assets/[name]-[hash][extname]`;
         },
       },
     },

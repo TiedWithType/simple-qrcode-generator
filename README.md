@@ -10,34 +10,36 @@ A straightforward and efficient QR code generator built with TypeScript, SCSS, a
 - **On demand**: Generate QR Code when you enter text.
 
 ## Preview
+
 [Check it here!](https://sqrg.vercel.app)
 
 ## Installation
 
 1. Clone the repository:
-    ```sh
-    git clone https://github.com/TiedWithType/simple-qrcode-generator.git
-    ```
+   ```sh
+   git clone https://github.com/TiedWithType/simple-qrcode-generator.git
+   ```
 2. Navigate to the project directory:
-    ```sh
-    cd simple-qrcode-generator
-    ```
+   ```sh
+   cd simple-qrcode-generator
+   ```
 3. Install dependencies:
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
 ## Usage
 
 1. Start the development server:
-    ```sh
-    npm start
-    ```
+   ```sh
+   npm start
+   ```
 2. Open your browser and navigate to `http://localhost:5173`
 
 ## Build
 
 To build the project for production, run:
+
 ```sh
 npm run build
 ```

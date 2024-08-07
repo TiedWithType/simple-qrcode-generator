@@ -1,3 +1,5 @@
+import { store } from "./store";
+
 export interface EventName {
   click: string;
   dblclick: string;
@@ -42,11 +44,7 @@ export interface EventName {
 }
 
 export const EventEmitter = (eventName: keyof EventName): MethodDecorator => {
-  return (target: object, key: string | symbol) => {
-    Reflect.defineProperty(target, `${String(eventName)}EventEmitter`, {
-      value: Reflect.get(target, key),
-      enumerable: true,
-      configurable: true,
-    });
+  return ({ constructor }: object, key: string) => {
+    store[constructor.name].events[eventName] = key;
   };
 };

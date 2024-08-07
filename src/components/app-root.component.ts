@@ -10,7 +10,7 @@ export class AppRootComponent implements Component<HTMLBodyElement> {
   constructor(
     private downloadComponent: DownloadComponent,
     private inputComponent: InputComponent,
-    public view: HTMLBodyElement
+    public view: HTMLBodyElement,
   ) {
     this.downloadComponent.enableDownload(false);
     this.inputComponent.generatePlaceholder();

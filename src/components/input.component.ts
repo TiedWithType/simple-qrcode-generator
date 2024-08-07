@@ -15,7 +15,7 @@ export class InputComponent implements Component<HTMLInputElement> {
     private imageComponent: ImageComponent,
     private download: DownloadComponent,
     private settings: Settings,
-    public view: HTMLInputElement
+    public view: HTMLInputElement,
   ) {
     this.settings = new Settings();
   }
@@ -25,7 +25,7 @@ export class InputComponent implements Component<HTMLInputElement> {
       "placeholder",
       this.settings.placeholders[
         Math.floor(Math.random() * this.settings.placeholders.length)
-      ]
+      ],
     );
   }
 

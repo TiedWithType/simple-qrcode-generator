@@ -1,4 +1,4 @@
-import { Service } from '@core/service';
+import { Service } from "@core/service";
 import { QRCodeToDataURLOptions } from "qrcode";
 
 @Service
@@ -10,7 +10,6 @@ export class Settings {
     errorCorrectionLevel: "Q",
     width: 250,
     type: "image/webp",
-   
   };
   placeholders: string[] = [
     "Oops! Something missing :(",

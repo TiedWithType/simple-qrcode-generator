@@ -9,14 +9,14 @@ import { EventEmitter } from "@core/event.emitter";
 export class DownloadComponent implements Component<HTMLAnchorElement> {
   constructor(
     private imageComponent: ImageComponent,
-    public view: HTMLAnchorElement
+    public view: HTMLAnchorElement,
   ) {}
 
   enableDownload(state: boolean) {
     this.view.toggleAttribute("data-enabled", state);
   }
 
-  @EventEmitter('click') protected handleClick() {
+  @EventEmitter("click") protected handleClick() {
     this.view.getAttribute("data-enabled") !== null
       ? Object.assign(this.view, {
           href: this.imageComponent.view.getAttribute("src"),

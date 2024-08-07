@@ -1,5 +1,5 @@
 export function Service<T extends { new (...args: any[]): {} }>(
-  constructor: T
+  constructor: T,
 ) {
   let instance: T;
 

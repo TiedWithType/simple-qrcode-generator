@@ -1,4 +1,6 @@
 import { Service } from "./service";
+import { Query, attachEvent } from "./dom";
+import { store } from "./store";
 
 export interface Component<T = HTMLElement> {
   view: T;
@@ -13,10 +15,6 @@ export const Component = (options: ComponentOptions): Function => {
   return (target: FunctionConstructor): Function => {
     Reflect.set(target.prototype, "name", target.name);
 
-    const ownKeys: (string | symbol)[] = Reflect.ownKeys(
-      target.prototype
-    ).filter((propertyKey: string) => propertyKey.endsWith("EventEmitter"));
-
     @Service
     class RootComponent extends target implements Component {
       view: HTMLElement;
@@ -27,28 +25,19 @@ export const Component = (options: ComponentOptions): Function => {
       }
 
       async onInit(): Promise<void> {
-        try {
-          this.view = document.querySelector(options.selector);
-
-          if (!this.view)
-            throw Error(`${options.selector} is not a valid selector!`);
-
-          await this.eventsMapper();
-        } catch (error) {
-          console.error(error);
-        }
+        this.view = Query(options.selector);
+        await this.eventsMapper();
       }
 
-      private async eventBind(eventName: string): Promise<void> {
-        this.view.addEventListener(
-          eventName.replace(/EventEmitter/g, ""),
-          (Reflect.get(this, eventName) as Function).bind(this)
-        );
+      private async eventBind([event, prop]): Promise<void> {
+        attachEvent(this.view, event, this[prop].bind(this));
       }
 
       private async eventsMapper(): Promise<void> {
         await Promise.all(
-          ownKeys.map((propertyKey: string) => this.eventBind(propertyKey))
+          Object.entries(store[target.name].events).map((event) =>
+            this.eventBind(event),
+          ),
         );
       }
     }

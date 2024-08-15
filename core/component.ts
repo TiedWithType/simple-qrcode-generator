@@ -1,7 +1,3 @@
-import { Service } from "./service";
-import { Query, attachEvent } from "./dom";
-import { store } from "./store";
-
 export interface Component<T = HTMLElement> {
   view: T;
 }
@@ -13,9 +9,6 @@ interface ComponentOptions {
 
 export const Component = (options: ComponentOptions): Function => {
   return (target: FunctionConstructor): Function => {
-    Reflect.set(target.prototype, "name", target.name);
-
-    @Service
     class RootComponent extends target implements Component {
       view: HTMLElement;
 
@@ -25,20 +18,20 @@ export const Component = (options: ComponentOptions): Function => {
       }
 
       async onInit(): Promise<void> {
-        this.view = Query(options.selector);
-        await this.eventsMapper();
+        this.view = document.querySelector(options.selector);
+        await this.eventsBinding();
       }
 
-      private async eventBind([event, prop]): Promise<void> {
-        attachEvent(this.view, event, this[prop].bind(this));
-      }
+      private async eventsBinding(): Promise<void> {
+        const events = Reflect.ownKeys(target.prototype)
+          .filter((k) => this[k].__eventBinding)
+          .forEach((k) => {
+            let ev = this[k].__eventBinding;
+            let fn = this[k].bind(this);
 
-      private async eventsMapper(): Promise<void> {
-        await Promise.all(
-          Object.entries(store[target.name].events).map((event) =>
-            this.eventBind(event),
-          ),
-        );
+            this.view.addEventListener(ev, fn);
+          });
+        await Promise.all(events);
       }
     }
 

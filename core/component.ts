@@ -22,14 +22,15 @@ export const Component = (options: ComponentOptions): Function => {
         await this.eventsBinding();
       }
 
-      private async eventsBinding(): Promise<void> {
+private async eventsBinding(): Promise<void> {
         const events = Reflect.ownKeys(target.prototype)
           .filter((k) => this[k].__eventBinding)
-          .forEach((k) => {
-            let ev = this[k].__eventBinding;
-            let fn = this[k].bind(this);
+          .map(key => [this[key].__eventBinding, this[key]])
+          .forEach(([event, listener]) => {
+          //  let ev = this[k].__eventBinding;
+         //   let fn = this[k].bind(this);
 
-            this.view.addEventListener(ev, fn);
+            this.view.addEventListener(event, listener.bind(this));
           });
         await Promise.all(events);
       }

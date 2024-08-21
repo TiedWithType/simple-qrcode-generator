@@ -1,25 +1,25 @@
 @mixin display-center($display, $direction: row) {
-  display: #{$display};
-  place-items: center;
-  place-content: center;
+ display: #{$display};
+ place-items: center;
+ place-content: center;
 
-  @if $display == flex {
-    flex-direction: #{$direction};
-  }
+ @if $display == flex {
+  flex-direction: #{$direction};
+ }
 }
 
 @mixin no-space {
-  margin: 0;
-  padding: 0;
+ margin: 0;
+ padding: 0;
 }
 
 @mixin font-face($font-name) {
-  font-family:
-    #{$font-name},
-    sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  user-select: none;
+ font-family:
+  #{$font-name},
+  sans-serif;
+ font-optical-sizing: auto;
+ font-weight: 400;
+ font-style: normal;
+ font-display: swap;
+ user-select: none;
 }

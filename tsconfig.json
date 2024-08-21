@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-    "target": "ES2020",
-    "lib": ["DOM", "ESNext", "Decorators"],
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "baseUrl": "./",
-    "paths": {
-      "@core/*": ["core/*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["src/components/*"],
-      "@service/*": ["src/service/*"]
-    }
-  },
-  "include": ["src", "core", "tests"]
+ "compilerOptions": {
+  "moduleResolution": "Bundler",
+  "module": "ESNext",
+  "target": "ES2020",
+  "lib": ["DOM", "ESNext", "Decorators"],
+  "experimentalDecorators": true,
+  "skipLibCheck": true,
+  "strict": false,
+  "baseUrl": "./",
+  "paths": {
+   "@core/*": ["core/*"],
+   "@assets/*": ["assets/*"],
+   "@components/*": ["src/components/*"],
+   "@service/*": ["src/service/*"]
+  }
+ },
+ "include": ["src", "core", "tests"]
 }

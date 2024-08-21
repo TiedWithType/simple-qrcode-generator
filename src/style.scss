@@ -2,141 +2,141 @@
 @import "./styles/_mixins";
 
 :root {
-  @include font-face("Comfortaa");
+ @include font-face("Comfortaa");
 }
 
 html,
 body {
-  block-size: $full-size;
-  @include no-space;
-  @include display-center(flex, column);
+ block-size: $full-size;
+ @include no-space;
+ @include display-center(flex, column);
 
-  @media (prefers-color-scheme: $theme) {
-    background-color: $text;
-  }
+ @media (prefers-color-scheme: $theme) {
+  background-color: $text;
+ }
 }
 
 .container {
-  @include display-center(grid);
-  grid-template-columns: $grid-column-width;
-  gap: $gap-medium;
+ @include display-center(grid);
+ grid-template-columns: $grid-column-width;
+ gap: $gap-medium;
 
-  * {
-    inline-size: $full-size;
-    box-sizing: border-box;
-    @include no-space;
+ * {
+  inline-size: $full-size;
+  box-sizing: border-box;
+  @include no-space;
+ }
+
+ &__header {
+  text-align: center;
+  font-size: $font-xlarge;
+  color: $text;
+
+  @media (prefers-color-scheme: $theme) {
+   color: $light;
+  }
+ }
+
+ &__image {
+  scale: 1;
+  transition: $custom-transition;
+  contain: content;
+  text-align: right;
+  font-size: $font-small;
+  color: $light;
+
+  border: solid 0.25rem $text;
+  border-radius: $padding-small;
+
+  &:hover {
+   scale: 1.5;
+   transition: $custom-transition;
   }
 
-  &__header {
-    text-align: center;
-    font-size: $font-xlarge;
-    color: $text;
+  @media (prefers-color-scheme: $theme) {
+   border: 0;
+  }
+ }
 
-    @media (prefers-color-scheme: $theme) {
-      color: $light;
-    }
+ &__footer {
+  @include display-center(flex);
+  text-align: center;
+  color: $text;
+  font-size: $font-small;
+  position: fixed;
+  bottom: $margin-bottom;
+  inline-size: $grid-column-width;
+
+  @media screen and (width > $min-width) {
+   position: relative;
   }
 
-  &__image {
-    scale: 1;
-    transition: $custom-transition;
-    contain: content;
-    text-align: right;
-    font-size: $font-small;
+  @media (prefers-color-scheme: $theme) {
+   color: $light;
+  }
+
+  &__icon {
+   color: $warning;
+   font-size: 1.25rem;
+   line-height: $font-large;
+   flex: 1;
+  }
+ }
+
+ &__section {
+  @include display-center(flex, column);
+  gap: $gap-small;
+
+  &__input {
+   font-family: inherit;
+   padding-block: $padding-small;
+   font-size: $font-medium;
+   border: 0;
+   border-bottom: solid 0.125rem;
+   outline: none;
+   text-align: center;
+   background-color: transparent;
+   transition: linear 0.2s;
+   color: $text;
+
+   @media (prefers-color-scheme: $theme) {
     color: $light;
+   }
 
-    border: solid 4px $text;
-    border-radius: $padding-small;
-
-    &:hover {
-      scale: 1.5;
-      transition: $custom-transition;
-    }
-
-    @media (prefers-color-scheme: $theme) {
-      border: 0;
-    }
+   &:focus {
+    border-bottom-color: $secondary;
+   }
   }
 
-  &__footer {
-    @include display-center(flex);
-    text-align: center;
-    color: $text;
-    font-size: $font-small;
-    position: fixed;
-    bottom: $margin-bottom;
-    inline-size: $grid-column-width;
+  &__button {
+   padding: $padding-medium;
+   font-family: inherit;
+   border-radius: $padding-small;
+   border: 0;
+   background-color: $divided;
+   text-decoration: none;
+   color: $light;
+   cursor: pointer;
+   transition: $custom-transition;
+   font-size: $font-medium;
+   text-align: center;
 
-    @media screen and (min-width: $min-width) {
-      position: relative;
-    }
-
-    @media (prefers-color-scheme: $theme) {
-      color: $light;
-    }
-
-    &__icon {
-      color: $warning;
-      font-size: 1.25rem;
-      line-height: $font-large;
-      flex: 1;
-    }
+   &[data-enabled] {
+    background-color: $primary;
+   }
   }
 
-  &__section {
-    @include display-center(flex, column);
-    gap: $gap-small;
+  &__counter {
+   text-align: center;
+   font-size: $font-xsmall;
 
-    &__input {
-      font-family: inherit;
-      padding-block: $padding-small;
-      font-size: $font-medium;
-      border: 0;
-      border-bottom: solid 0.125rem;
-      outline: none;
-      text-align: center;
-      background-color: transparent;
-      transition: linear 0.2s;
-      color: $text;
-
-      @media (prefers-color-scheme: $theme) {
-        color: $light;
-      }
-
-      &:focus {
-        border-bottom-color: $secondary;
-      }
-    }
-
-    &__button {
-      padding: $padding-medium;
-      font-family: inherit;
-      border-radius: $padding-small;
-      border: 0;
-      background-color: $divided;
-      text-decoration: none;
-      color: $light;
-      cursor: pointer;
-      transition: $custom-transition;
-      font-size: $font-medium;
-      text-align: center;
-
-      &[data-enabled] {
-        background-color: $primary;
-      }
-    }
-
-    &__counter {
-      text-align: center;
-      font-size: $font-xsmall;
-
-      @media (prefers-color-scheme: $theme) {
-        color: $light;
-      }
-    }
+   @media (prefers-color-scheme: $theme) {
+    color: $light;
+   }
   }
+ }
 }
 
 input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
+ -webkit-appearance: none;
 }

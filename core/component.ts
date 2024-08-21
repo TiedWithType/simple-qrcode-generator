@@ -4,12 +4,15 @@ export interface Component<T = HTMLElement> {
 
 interface ComponentOptions {
   selector: string;
-  dependencies?: Function[];
+  dependencies?: any[];
 }
 
-export const Component = (options: ComponentOptions): Function => {
-  return (target: FunctionConstructor): Function => {
-    class RootComponent extends target implements Component {
+// Typ konstruktora dla klas komponentów
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+export const Component = (options: ComponentOptions): ClassDecorator => {
+  return <T extends Constructor>(Base: T): Function => {
+    class RootComponent extends Base implements Component {
       view: HTMLElement;
 
       constructor(...args: any[]) {
@@ -17,22 +20,26 @@ export const Component = (options: ComponentOptions): Function => {
         this.onInit();
       }
 
-      async onInit(): Promise<void> {
-        this.view = document.querySelector(options.selector);
-        await this.eventsBinding();
+      private async onInit(): Promise<void> {
+        this.view = document.querySelector(options.selector) as HTMLElement;
+        if (this.view) {
+          await this.eventsBinding();
+        } else {
+          console.warn(`Selector "${options.selector}" not found in the DOM.`);
+        }
       }
 
-private async eventsBinding(): Promise<void> {
-        const events = Reflect.ownKeys(target.prototype)
-          .filter((k) => this[k].__eventBinding)
-          .map(key => [this[key].__eventBinding, this[key]])
-          .forEach(([event, listener]) => {
-          //  let ev = this[k].__eventBinding;
-         //   let fn = this[k].bind(this);
-
-            this.view.addEventListener(event, listener.bind(this));
+      private async eventsBinding(): Promise<void> {
+        Reflect.ownKeys(Base.prototype)
+          .filter((key) => {
+            const descriptor = Object.getOwnPropertyDescriptor(Base.prototype, key);
+            return descriptor?.value?.__eventBinding;
+          })
+          .forEach((key) => {
+            const method = this[key as keyof this] as Function;
+            const event = method.__eventBinding;
+            this.view.addEventListener(event, method.bind(this));
           });
-        await Promise.all(events);
       }
     }
 

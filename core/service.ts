@@ -1,15 +1,15 @@
 export function Service<T extends { new (...args: any[]): {} }>(
-  constructor: T,
+ constructor: T,
 ) {
-  let instance: T;
+ let instance: T;
 
-  const handler = {
-    construct(target: T, args: any[]) {
-      if (!instance) (instance as any) = Reflect.construct(target, args);
+ const handler = {
+  construct(target: T, args: any[]) {
+   if (!instance) (instance as any) = Reflect.construct(target, args);
 
-      return instance;
-    },
-  };
+   return instance;
+  },
+ };
 
-  return new Proxy(constructor, handler);
+ return new Proxy(constructor, handler);
 }

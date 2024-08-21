@@ -1,30 +1,30 @@
 {
-  "name": "simple-qrcode-generator",
-  "version": "1.0.0-release",
-  "type": "module",
-  "description": "A straightforward and efficient QR code generator built with TypeScript, SCSS, and HTML",
-  "scripts": {
-    "start": "vite",
-    "build": "vite build"
-  },
-  "keywords": [
-    "qrcode",
-    "generator",
-    "qrcode-generator",
-    "simple-qrcode"
-  ],
-  "author": "TiedWithType",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^20.14.12",
-    "@types/qrcode": "^1.5.5",
-    "prettier": "3.3.3",
-    "sass": "^1.77.8",
-    "vite": "^5.3.5",
-    "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^2.0.4"
-  },
-  "dependencies": {
-    "qrcode": "^1.5.3"
-  }
+ "name": "simple-qrcode-generator",
+ "version": "1.0.0-release",
+ "type": "module",
+ "description": "A straightforward and efficient QR code generator built with TypeScript, SCSS, and HTML",
+ "scripts": {
+  "start": "vite",
+  "build": "vite build"
+ },
+ "keywords": [
+  "qrcode",
+  "generator",
+  "qrcode-generator",
+  "simple-qrcode"
+ ],
+ "author": "TiedWithType",
+ "license": "MIT",
+ "devDependencies": {
+  "@types/node": "^20.14.12",
+  "@types/qrcode": "^1.5.5",
+  "prettier": "3.3.3",
+  "sass": "^1.77.8",
+  "vite": "^5.3.5",
+  "vite-tsconfig-paths": "^4.3.2",
+  "vitest": "^2.0.4"
+ },
+ "dependencies": {
+  "qrcode": "^1.5.4"
+ }
 }

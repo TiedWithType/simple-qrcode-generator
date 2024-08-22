@@ -1,3 +1,5 @@
+import { EVENT_EMITTER_KEY } from "./event.emitter";
+
 export interface Component<T = HTMLElement> {
   view: T;
 }
@@ -33,11 +35,11 @@ export const Component = (options: ComponentOptions): ClassDecorator => {
         Reflect.ownKeys(Base.prototype)
           .filter((key) => {
             const descriptor = Object.getOwnPropertyDescriptor(Base.prototype, key);
-            return descriptor?.value?.__eventBinding;
+            return descriptor && EVENT_EMITTER_KEY in descriptor.value;
           })
           .forEach((key) => {
             const method = this[key as keyof this] as Function;
-            const event = method.__eventBinding;
+            const event = method[EVENT_EMITTER_KEY];
             this.view.addEventListener(event, method.bind(this));
           });
       }

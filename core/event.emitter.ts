@@ -1,3 +1,5 @@
+export const EVENT_EMITTER_KEY = Symbol("EVENT_EMITTER_KEY");
+
 export interface EventName {
  click: string;
  dblclick: string;
@@ -43,6 +45,6 @@ export interface EventName {
 
 export const EventEmitter = (eventName: keyof EventName): MethodDecorator => {
  return (target: object, key: string, descriptor: PropertyDescriptor) => {
-  descriptor.value.__eventBinding = eventName;
+  descriptor.value[EVENT_EMITTER_KEY] = eventName;
  };
 };

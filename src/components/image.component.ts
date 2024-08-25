@@ -1,14 +1,10 @@
 import QRCode from "qrcode";
-import { Component } from "@core/component";
+import { Component, EventListener } from "@core/core";
 import { Settings } from "@service/settings.service";
-import { EventEmitter } from "@core/event.emitter";
 
 @Component({ selector: ".container__image" })
-export class ImageComponent implements Component<HTMLImageElement> {
- constructor(
-  private settings: Settings,
-  public view: HTMLImageElement,
- ) {
+export class ImageComponent {
+ constructor(private settings: Settings) {
   this.settings = new Settings();
  }
 
@@ -18,13 +14,13 @@ export class ImageComponent implements Component<HTMLImageElement> {
    this.settings.imageConfig,
   );
 
-  Object.assign(this.view, {
+  Object.assign(this.viewRef, {
    src: text.length > 0 ? blob : "assets/null.webp",
-   title: text.length > 0 ? `${text}.webp` : "null.webp",
+   title: text.length > 0 ? `${text}.webp` : "null.webp"
   });
  };
 
- @EventEmitter("contextmenu") protected handleContextMenu(event: PointerEvent) {
+ @EventListener("contextmenu") protected handleContextMenu(event: PointerEvent) {
   event.preventDefault();
  }
 }

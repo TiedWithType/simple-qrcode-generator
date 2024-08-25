@@ -1,6 +1,7 @@
-export const EVENT_EMITTER_KEY = Symbol("EVENT_EMITTER_KEY");
+export const EVENT_EMITTER = Symbol("EVENTEMITTER");
+export const EVENT_LISTENER = Symbol("EVENTLISTENER");
 
-export interface EventName {
+interface EventName {
  click: string;
  dblclick: string;
  mousedown: string;
@@ -43,8 +44,21 @@ export interface EventName {
  touchcancel: string;
 }
 
-export const EventEmitter = (eventName: keyof EventName): MethodDecorator => {
+export const EventListener = (eventName: keyof EventName): MethodDecorator => {
  return (target: object, key: string, descriptor: PropertyDescriptor) => {
-  descriptor.value[EVENT_EMITTER_KEY] = eventName;
+  descriptor.value[EVENT_LISTENER] = eventName;
+  return descriptor.value;
  };
 };
+
+export const EventListenerResolver = (target, ctx) => {
+
+ Reflect.ownKeys(target.prototype).filter(key => {
+  return ctx[key][EVENT_LISTENER];
+ }).forEach(key => {
+  const method = ctx[key];
+  const event = method[EVENT_LISTENER];
+
+  ctx.viewRef.addEventListener(event, method.bind(ctx));
+ })
+}

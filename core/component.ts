@@ -1,50 +1,35 @@
-import { EVENT_EMITTER_KEY } from "./event.emitter";
+import { EVENT_LISTENER, EventListenerResolver } from "./events";
 
 export interface Component<T = HTMLElement> {
-  view: T;
+ viewRef: T;
 }
 
-interface ComponentOptions {
-  selector: string;
-  dependencies?: any[];
+interface IComponent {
+ selector: string;
+ dependencies?: any[];
 }
 
-// Typ konstruktora dla klas komponentów
 type Constructor<T = {}> = new (...args: any[]) => T;
 
-export const Component = (options: ComponentOptions): ClassDecorator => {
-  return <T extends Constructor>(Base: T): Function => {
-    class RootComponent extends Base implements Component {
-      view: HTMLElement;
+export const Component = (options: IComponent): ClassDecorator => {
+ const { selector, dependencies } = options;
 
-      constructor(...args: any[]) {
-        super(...args);
-        this.onInit();
-      }
-
-      private async onInit(): Promise<void> {
-        this.view = document.querySelector(options.selector) as HTMLElement;
-        if (this.view) {
-          await this.eventsBinding();
-        } else {
-          console.warn(`Selector "${options.selector}" not found in the DOM.`);
-        }
-      }
-
-      private async eventsBinding(): Promise<void> {
-        Reflect.ownKeys(Base.prototype)
-          .filter((key) => {
-            const descriptor = Object.getOwnPropertyDescriptor(Base.prototype, key);
-            return descriptor && EVENT_EMITTER_KEY in descriptor.value;
-          })
-          .forEach((key) => {
-            const method = this[key as keyof this] as Function;
-            const event = method[EVENT_EMITTER_KEY];
-            this.view.addEventListener(event, method.bind(this));
-          });
-      }
+ return <T extends Constructor>(Base: T): Function => {
+  class WebComponent extends Base {
+   constructor(...args) {
+    super(...args);
+    try {
+     this.initHooks();
+    } catch (error) {
+     console.error(error.stack);
     }
+   }
+   async initHooks() {
+    this.viewRef = document.querySelector(selector);
+    EventListenerResolver(Base, this);
+   }
+  }
 
-    return Reflect.construct(RootComponent, options.dependencies || []);
-  };
-};
+  return Reflect.construct(WebComponent, dependencies||[]);
+ }
+}

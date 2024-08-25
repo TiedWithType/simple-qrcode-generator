@@ -1,27 +1,25 @@
-import { Component } from "@core/component";
-import { CounterComponent } from "@components/counter.component";
-import { ImageComponent } from "@components/image.component";
-import { DownloadComponent } from "@components/download.component";
+import { Component, EventListener} from "@core/core";
+import { CounterComponent } from "./counter.component";
+import { ImageComponent } from "./image.component";
+import { DownloadComponent } from "./download.component";
 import { Settings } from "@service/settings.service";
-import { EventEmitter } from "@core/event.emitter";
 
 @Component({
  selector: ".container__section__input",
  dependencies: [CounterComponent, ImageComponent, DownloadComponent],
 })
-export class InputComponent implements Component<HTMLInputElement> {
+export class InputComponent {
  constructor(
   private counterComponent: CounterComponent,
   private imageComponent: ImageComponent,
   private download: DownloadComponent,
-  private settings: Settings,
-  public view: HTMLInputElement,
+  private settings: Settings
  ) {
   this.settings = new Settings();
  }
 
  generatePlaceholder(): void {
-  this.view.setAttribute(
+  this.viewRef.setAttribute(
    "placeholder",
    this.settings.placeholders[
     Math.floor(Math.random() * this.settings.placeholders.length)
@@ -30,19 +28,19 @@ export class InputComponent implements Component<HTMLInputElement> {
  }
 
  public inputControl() {
-  this.view.setAttribute("maxLength", `${this.settings.maxLimit}`);
-  this.counterComponent.update(this.view.value.length);
+  this.viewRef.setAttribute("maxLength", `${this.settings.maxLimit}`);
+  this.counterComponent.update(this.viewRef.value.length);
 
-  this.download.enableDownload(!this.view.validity.valueMissing);
+  this.download.enableDownload(!this.viewRef.validity.valueMissing);
  }
 
- @EventEmitter("focus") protected handleFocus() {
+ @EventListener("focus") protected handleFocus() {
   this.inputControl();
   this.generatePlaceholder();
  }
 
- @EventEmitter("input") protected async handleInput() {
-  await this.imageComponent.generateQRCode(this.view.value);
+ @EventListener("input") protected async handleInput() {
+  await this.imageComponent.generateQRCode(this.viewRef.value);
   this.inputControl();
  }
 }

@@ -1,27 +1,23 @@
-import { Component } from "@core/component";
-import { ImageComponent } from "@components/image.component";
-import { EventEmitter } from "@core/event.emitter";
+import { Component, EventListener } from "@core/core";
+import { ImageComponent } from "./image.component";
 
 @Component({
  selector: ".container__section__button",
  dependencies: [ImageComponent],
 })
-export class DownloadComponent implements Component<HTMLAnchorElement> {
- constructor(
-  private imageComponent: ImageComponent,
-  public view: HTMLAnchorElement,
- ) {}
+export class DownloadComponent {
+ constructor(private imageComponent: ImageComponent) {}
 
  enableDownload(state: boolean) {
-  this.view.toggleAttribute("data-enabled", state);
+  this.viewRef.toggleAttribute("data-enabled", state);
  }
 
- @EventEmitter("click") protected handleClick() {
-  this.view.getAttribute("data-enabled") !== null
-   ? Object.assign(this.view, {
-      href: this.imageComponent.view.getAttribute("src"),
-      download: this.imageComponent.view.getAttribute("title"),
+ @EventListener("click") protected handleClick() {
+  this.viewRef.getAttribute("data-enabled") !== null
+   ? Object.assign(this.viewRef, {
+      href: this.imageComponent.viewRef.getAttribute("src"),
+      download: this.imageComponent.viewRef.getAttribute("title"),
      })
-   : this.view.removeAttribute("href");
+   : this.viewRef.removeAttribute("href");
  }
 }

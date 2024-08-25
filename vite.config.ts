@@ -6,7 +6,7 @@ export default defineConfig({
  plugins: [tsconfigPaths()],
  build: {
   rollupOptions: {
-   external: ["./node_modules/qrcode"],
+//   external: ["./node_modules/qrcode"],
    output: {
     assetFileNames: (assetInfo) => {
      if (assetInfo.name && assetInfo.name.endsWith(".webp")) {

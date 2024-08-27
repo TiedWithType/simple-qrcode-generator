@@ -1,4 +1,4 @@
-import { EVENT_LISTENER, EventListenerResolver } from "./events";
+import { EventListenerResolver } from "./events";
 
 export interface Component<T = HTMLElement> {
  viewRef: T;
@@ -26,7 +26,7 @@ export const Component = (options: IComponent): ClassDecorator => {
    }
    async initHooks() {
     this.viewRef = document.querySelector(selector);
-    EventListenerResolver(Base, this);
+    EventListenerResolver(this, Base);
    }
   }
 

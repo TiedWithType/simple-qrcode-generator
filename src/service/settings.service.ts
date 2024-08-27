@@ -1,5 +1,5 @@
-import { Service } from "@core/service";
-import { QRCodeToDataURLOptions } from "qrcode";
+import { Service } from "/core/service";
+import { QRCodeToDataURLOptions } from "/deps/qrcode";
 
 @Service
 export class Settings {

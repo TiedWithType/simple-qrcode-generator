@@ -1,5 +1,5 @@
-import { Component } from "@core/core";
-import { Settings } from "@service/settings.service";
+import { Component } from "/core/core";
+import { Settings } from "../service/settings.service";
 
 @Component({ selector: ".container__section__counter" })
 export class CounterComponent {

@@ -1,4 +1,4 @@
-import { Component } from "@core/core";
+import { Component } from "/core/core";
 import { DownloadComponent } from "./download.component";
 import { InputComponent } from "./input.component";
 

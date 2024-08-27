@@ -1,6 +1,6 @@
-import QRCode from "qrcode";
-import { Component, EventListener } from "@core/core";
-import { Settings } from "@service/settings.service";
+import QRCode from "/deps/qrcode";
+import { Component, EventListener } from "/core/core";
+import { Settings } from "../service/settings.service";
 
 @Component({ selector: ".container__image" })
 export class ImageComponent {
@@ -15,7 +15,7 @@ export class ImageComponent {
   );
 
   Object.assign(this.viewRef, {
-   src: text.length > 0 ? blob : "assets/null.webp",
+   src: blob,
    title: text.length > 0 ? `${text}.webp` : "null.webp"
   });
  };

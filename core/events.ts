@@ -1,5 +1,5 @@
-export const EVENT_EMITTER = Symbol("EVENTEMITTER");
-export const EVENT_LISTENER = Symbol("EVENTLISTENER");
+const EVENT_EMITTER = Symbol("EVENTEMITTER");
+const EVENT_LISTENER = Symbol("EVENTLISTENER");
 
 interface EventName {
  click: string;
@@ -51,7 +51,7 @@ export const EventListener = (eventName: keyof EventName): MethodDecorator => {
  };
 };
 
-export const EventListenerResolver = (target, ctx) => {
+export const EventListenerResolver = (ctx, target) => {
 
  Reflect.ownKeys(target.prototype).filter(key => {
   return ctx[key][EVENT_LISTENER];

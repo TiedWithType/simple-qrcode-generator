@@ -7,8 +7,8 @@
   "author": "TiedWithType <kamilochman79@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "vite --open",
-    "build": "vite build"
+    "start": "vite --open src",
+    "build": "vite build src --outDir=../dist --emptyOutDir"
   },
   "dependencies": {
     "qrcode": "^1.5.4",

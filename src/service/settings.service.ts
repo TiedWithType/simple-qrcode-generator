@@ -1,15 +1,15 @@
 import { Service } from "/core/service";
-import { QRCodeToDataURLOptions } from "/deps/qrcode";
 
 @Service
 export class Settings {
- maxLimit = 50;
+ ext = "webp";
+ maxLimit = 100;
  default = "null";
- imageConfig: QRCodeToDataURLOptions = {
+ imageConfig = {
   margin: 1,
   errorCorrectionLevel: "Q",
   width: 250,
-  type: "image/webp",
+  type: `image/${this.ext}`,
  };
  placeholders: string[] = [
   "Oops! Something missing :(",

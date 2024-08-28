@@ -1,4 +1,4 @@
-import { Component, EventListener } from "/core/core";
+import { Component, EventListener } from "/core";
 import { ImageComponent } from "./image.component";
 
 @Component({

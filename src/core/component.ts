@@ -1,4 +1,5 @@
 import { EventListenerResolver } from "./events";
+import { Service } from "./service";
 
 export interface Component<T = HTMLElement> {
  viewRef: T;
@@ -15,6 +16,7 @@ export const Component = (options: IComponent): ClassDecorator => {
  const { selector, dependencies } = options;
 
  return <T extends Constructor>(Base: T): Function => {
+  @Service
   class WebComponent extends Base {
    constructor(...args) {
     super(...args);

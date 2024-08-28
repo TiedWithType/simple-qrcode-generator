@@ -1,6 +1,6 @@
-import QRCode from "/deps/qrcode";
-import { Component, EventListener } from "/core/core";
-import { Settings } from "../service/settings.service";
+import QRCode from "/core/qrcode";
+import { Component, EventListener } from "/core";
+import { Settings } from "/service/settings.service";
 
 @Component({ selector: ".container__image" })
 export class ImageComponent {
@@ -16,7 +16,7 @@ export class ImageComponent {
 
   Object.assign(this.viewRef, {
    src: blob,
-   title: text.length > 0 ? `${text}.webp` : "null.webp"
+   title: text.length > 0 ? `${text}.${this.settings.ext}` : `${this.settings.default}.${this.settings.ext}`
   });
  };
 

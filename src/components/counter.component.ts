@@ -1,4 +1,4 @@
-import { Component } from "/core/core";
+import { Component } from "/core";
 import { Settings } from "../service/settings.service";
 
 @Component({ selector: ".container__section__counter" })

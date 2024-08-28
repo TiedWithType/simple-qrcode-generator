@@ -1,8 +1,8 @@
-import { Component, EventListener} from "/core/core";
+import { Component, EventListener} from "/core";
 import { CounterComponent } from "./counter.component";
 import { ImageComponent } from "./image.component";
 import { DownloadComponent } from "./download.component";
-import { Settings } from "../service/settings.service";
+import { Settings } from "/service/settings.service";
 
 @Component({
  selector: ".container__section__input",

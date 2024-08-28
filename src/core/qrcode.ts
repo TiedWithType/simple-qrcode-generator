@@ -2081,4 +2081,3 @@ var require_browser = __commonJS({
   }
 });
 export default require_browser();
-//# sourceMappingURL=qrcode.ts.map

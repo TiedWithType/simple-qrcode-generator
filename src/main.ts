@@ -1,3 +1,3 @@
 import { AppRootComponent } from "./components/app-root.component";
 
-AppRootComponent;
+AppRootComponent.init();

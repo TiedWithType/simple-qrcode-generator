@@ -1,4 +1,4 @@
-import { Component, EventListener} from "/core";
+import { Component, EventListener, Inject } from "/core";
 import { CounterComponent } from "./counter.component";
 import { ImageComponent } from "./image.component";
 import { DownloadComponent } from "./download.component";
@@ -6,41 +6,32 @@ import { Settings } from "/service/settings.service";
 
 @Component({
  selector: ".container__section__input",
- dependencies: [CounterComponent, ImageComponent, DownloadComponent],
+ dependencies: [CounterComponent,
+ ImageComponent, DownloadComponent],
 })
 export class InputComponent {
- constructor(
-  private counterComponent: CounterComponent,
-  private imageComponent: ImageComponent,
-  private download: DownloadComponent,
-  private settings: Settings
- ) {
-  this.settings = new Settings();
- }
+ @Inject(Settings) settings;
 
  generatePlaceholder(): void {
   this.viewRef.setAttribute(
-   "placeholder",
-   this.settings.placeholders[
-    Math.floor(Math.random() * this.settings.placeholders.length)
-   ],
-  );
+   "placeholder", this.settings.randomPlaceholder());
+ }
+ 
+ get value() {
+  return this.viewRef.value;
+ }
+ 
+ get valueMissing() {
+  return this.viewRef.validity.valueMissing;
  }
 
- public inputControl() {
-  this.viewRef.setAttribute("maxLength", `${this.settings.maxLimit}`);
-  this.counterComponent.update(this.viewRef.value.length);
-
-  this.download.enableDownload(!this.viewRef.validity.valueMissing);
- }
-
- @EventListener("focus") protected handleFocus() {
-  this.inputControl();
+ @EventListener("focus") focusController() {
   this.generatePlaceholder();
  }
 
- @EventListener("input") protected async handleInput() {
-  await this.imageComponent.generateQRCode(this.viewRef.value);
-  this.inputControl();
+ @EventListener("input") async inputController() {
+  await this.ImageComponent.generateQRCode(this.value);
+  this.CounterComponent.update(this.value.length);
+  this.DownloadComponent.enableDownload(!this.valueMissing);
  }
 }

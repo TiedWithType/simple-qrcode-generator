@@ -6,17 +6,17 @@ import { ImageComponent } from "./image.component";
  dependencies: [ImageComponent],
 })
 export class DownloadComponent {
- constructor(private imageComponent: ImageComponent) {}
-
  enableDownload(state: boolean) {
   this.viewRef.toggleAttribute("data-enabled", state);
  }
 
- @EventListener("click") protected handleClick() {
+ @EventListener("click") clickController() {
+  const { src, title } = this.ImageComponent;
+ 
   this.viewRef.getAttribute("data-enabled") !== null
    ? Object.assign(this.viewRef, {
-      href: this.imageComponent.viewRef.getAttribute("src"),
-      download: this.imageComponent.viewRef.getAttribute("title"),
+      href: src,
+      download: title,
      })
    : this.viewRef.removeAttribute("href");
  }

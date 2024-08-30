@@ -6,14 +6,7 @@
   "lib": ["DOM", "ESNext", "Decorators"],
   "experimentalDecorators": true,
   "skipLibCheck": true,
-  "strict": false,
-  "baseUrl": "./",
-  "paths": {
-   "@core/*": ["core/*"],
-   "@assets/*": ["assets/*"],
-   "@components/*": ["src/components/*"],
-   "@service/*": ["src/service/*"]
-  }
+  "strict": false
  },
- "include": ["src", "core"]
+ "include": ["src"]
 }

@@ -1,4 +1,4 @@
-import { Component } from "/core";
+import { Component, EventListener } from "/core";
 import { DownloadComponent } from "./download.component";
 import { InputComponent } from "./input.component";
 
@@ -7,11 +7,7 @@ import { InputComponent } from "./input.component";
  dependencies: [DownloadComponent, InputComponent],
 })
 export class AppRootComponent {
- constructor(
-  private downloadComponent: DownloadComponent,
-  private inputComponent: InputComponent,
- ) {
-  this.downloadComponent.enableDownload(false);
-  this.inputComponent.generatePlaceholder();
+ init() {
+  this.InputComponent.generatePlaceholder();
  }
 }

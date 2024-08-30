@@ -23,4 +23,11 @@ export class Settings {
   "This space needs you!",
   "Just a fun placeholder!",
  ];
+ 
+ randomPlaceholder(): void {
+  const size = this.placeholders.length;
+  const rand = Math.floor(Math.random() * size);
+  
+  return this.placeholders.at(rand);
+ }
 }
